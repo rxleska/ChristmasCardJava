@@ -7,13 +7,13 @@ int[] items;
 ArrayList<SnowFlake> snowFlakes;
 int snowFreq;
 String version = "JAVA 1";
-
+float t;
 //Setup
 void setup(){
   //Setup frame
   size(800,800);
   background(100);
-  
+  frameRate(120);
   //initalize objects
   button = new Button();
   store = new Store();
@@ -57,7 +57,7 @@ void draw(){
   
   //snow anglur speed
   
-  float t = frameCount / 240;
+  t = frameCount / 240;
   fill(255);
   
   //Snow Creation Speed
@@ -69,7 +69,7 @@ void draw(){
     counter = 0;
   }
  
-  moveSnow(t);
+  
   
   button.show();
   
@@ -86,21 +86,28 @@ void draw(){
   text(version, width/60, height-(height * 0.01));
   
   sign.signMove();
+  for(SnowFlake flake: snowFlakes){
+    flake.display();
+    if(flake.update(t)){
+      snowFlakes.remove(flake);
+    }
+  }
+  
+    
   
   
+  
+  //moveSnow(t);
   //display drop downs on store items 
   info();
 }
 
-void moveSnow(float t){
-  for (SnowFlake flake : snowFlakes) {
-    if(flake.update(t)){
-      moveSnow(t);
-      break;
-    } // update snowflake position
-    flake.display(); // draw snowflake
-  }
-}
+//void moveSnow(float t){
+//  for (SnowFlake flake : snowFlakes) {
+//    if(!flake.update(t))
+//      flake.display(); // draw snowflake
+//  }
+//}
 
 void mouseClicked(){
   //check for snow button click

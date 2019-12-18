@@ -16,10 +16,10 @@ class SnowFlake{
     
     if(posY > height){
       int index = snowFlakes.indexOf(this);
-      snowFlakes.remove(index);
       return true;
     }
     return false;
+    
   }
   void display(){
     fill(255);
